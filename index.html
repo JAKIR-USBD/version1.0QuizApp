@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz App</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; background: purple; color: red;
+    font-style: italic; font-weight: bold; font-size: 20px; }
+    #rulesSection { border: 4px red double; }
+    .hidden { display: none; }
+    .question { margin-bottom: 20px; }
+    .option { display: block; margin: 5px 0; }
+    .admin-only { color: red; background: black; cursor: pointer; 
+    
+  font-size: 12px;
+  margin-left: 4px;
+  padding: 2px 6px;
+}
+    
+    h1 {
+       text-align: center;
+      text-decoration: double underline blue;
+      text-decoration-thickness: px; color:  lime; 
+    }
+    h6 { 
+       text-align: center;
+      text-decoration: double underline blue;
+      text-decoration-thickness: px; color:  aqua; font-size: 30px;
+    }
+    #login {
+  max-width: 500px;
+  margin: 80px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, lime, purple);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInSlide 1s ease-out;
+  transition: transform 0.3s ease;
+  border: 4px double;
+}
+   #login:hover {
+  transform: scale(1.02);
+  background-color: lime;
+}
+    #login h2 {
+  text-align: start;
+  margin-bottom: 20px;
+  color: black;
+   border: 6px red double;
+  width:100px;
+   
+    font-style: italic; font-weight: bold; font-size: 30px;
+}
+    #login input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  border: 4px double;
+  background-color: pink;
+      color: blue;
+  
+}
+
+#login input:focus {
+  border-color: blue;
+  outline: none;
+  
+}
+    #login input:hover {
+      background-color: black;
+      color: red;
+    }
+
+#login button {
+  width: 30%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: 6px red double;
+}
+
+#login button:hover {
+  background-color: aqua;
+  color: red;
+  border: 4px red double;
+}
+    
+    #rulesSection {
+       max-width: 500px;
+  margin: 80px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, black, aqua);
+      color: red;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInSlide 3s ease-out;
+  transition: transform 0.3s ease;
+  border: 4px double;
+      
+    }
+    #rulesSection:hover {
+      transform: scale(1.02);
+  background-color: blue;
+      border: 4px red double;
+    }
+    #rulesSection button:hover {
+      color: black;
+      background-color: red;
+      border: 4px red double;
+    }
+    #rulesSection h2 {
+      text-align: start;
+  margin-bottom: 20px;
+  color: aqua;
+   border: 6px lime double;
+      width: 200px;
+   
+    font-style: italic; font-weight: bold; font-size: 30px;
+    }
+    
+    #adminSection {
+      max-width: 500px;
+  margin: 80px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, gray, black);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInSlide 1s ease-out;
+  transition: transform 0.3s ease;
+  border: 4px double;
+    }
+    #adminSection:hover {
+  transform: scale(1.02);
+  background-color: black;
+}
+    #adminSection h4 {
+  text-align: start;
+  margin-bottom: 20px;
+  color: lime;
+   border: 6px red double;
+  width: 200px;
+   
+    font-style: italic; font-weight: bold; font-size: 30px;
+}
+    #adminSection input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+  border: 4px double;
+  background-color: pink;
+      color: blue;
+  
+}
+
+#adminSection input:focus {
+  border-color: blue;
+  outline: none;
+  
+}
+    #adminSection input:hover {
+      background-color: black;
+      color: red;
+    }
+
+#adminSection button {
+  width: 30%;
+  padding: 12px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border: 6px red double;
+}
+
+#adminSection button:hover {
+  background-color: aqua;
+  color: red;
+  border: 4px red double;
+}
+    
+   #quizSection {
+       max-width: 800px;
+  margin: 80px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, black, gray);
+      color: lime;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInSlide 3s ease-out;
+  transition: transform 0.3s ease;
+  border: 4px double;
+    }
+    #quizSection h3 {
+  text-align: start;
+  margin-bottom: 20px;
+  color: aqua;
+   border: 6px red double;
+  width: 200px;
+   
+    font-style: italic; font-weight: bold; font-size: 30px;
+}
+    #quizSection:hover {
+      transform: scale(1.02);
+  background-color: blue;
+      color: blue;
+      
+    }
+    #quizSection button:hover {
+      color: lime;
+      background-color: purple;
+      border: 4px red double;
+    }
+    
+     #leaderboardSection {
+      max-width: 900px;
+  margin: 80px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, gray, teal);
+      color: lime;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: fadeInSlide 3s ease-out;
+  transition: transform 0.3s ease;
+  border: 4px double;
+      
+    }
+     #leaderboardSection h3 {
+      text-align: start;
+  margin-bottom: 20px;
+  color: blue;
+       width: 200px;
+   
+       border: 6px red double;
+   
+    font-style: italic; font-weight: bold; font-size: 30px;
+    }
+    #leaderboardSection:hover {
+      transform: scale(1.02);
+  background-color: blue;
+      color: blue;
+      
+    }
+     #leaderboardSection button:hover {
+      color: black;
+      background-color: red;
+      border: 4px purple double;
+    }
+   
+    
+    .btn { margin: 10px 0; }
+    table, th, td { border: 1px solid #ccc; border-collapse: collapse; padding: 5px; 
+    color: aqua; }
+    th { background: black; }
+    input, button { margin: 5px 0; }
+    
+    
+    .top1 { background-color: gold; font-weight: bold; color: lime; }
+    .top2 { background-color: silver; font-weight: bold; color: blue; }
+    .top3 { background-color: green; font-weight: bold; color: black; }
+    #notification { margin-top: 10px; font-weight: bold; color: lime; }
+    
+    img {
+  width: 250px;
+      display: block;
+      margin: 0 auto;
+    position: absolute;
+      top: 10px;          /* Distance from the top */
+      left: 10px;      }
+   img:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+    #img {
+      display: block;
+      margin: 0 auto;
+            
+    }
+  </style>
+</head>
+<body>
+  <img src="C:\Users\hossa\OneDrive\Pictures\Screenshots\Screenshot 2025-06-07 231906.png" alt="Company Logo" class="img" >
+  <h1>WELCOME TO ONLINE QUIZ EXAM</h1>
+  <h6>LEARN TO KNOW</h6>
+
+  <!-- Login -->
+  <section id="login">
+    <h2>Login</h2>
+    <input id="name" placeholder="Name"><br>
+    <input id="email" placeholder="Email"><br>
+    <input id="institution" placeholder="Institution"><br>
+    <button onclick="showRules()">Continue</button>
+  </section>
+
+  <!-- Rules -->
+  <section id="rulesSection" class="hidden">
+    <h2>Exam Rules</h2>
+    <ul>
+      <li>Each correct answer: +1</li>
+      <li>Wrong MCQ/checkbox: -0.25</li>
+      <li>Short answers must be accurate</li>
+      <li>Single attempt only</li>
+    </ul>
+    <button onclick="proceedToAdmin()">Next</button>
+  </section>
+
+  <!-- Admin Panel -->
+  <section id="adminSection" class="hidden">
+    <h4>Admin Panel</h4>
+    <input id="adminUser" placeholder="Admin Username"><br>
+    <input id="adminPass" type="password" placeholder="Admin Password"><br>
+    <input id="adminSecondPass" type="password" placeholder="Admin Second Password"><br>
+    <button onclick="verifyAdmin()">Login as Admin</button>
+    <div id="adminControls" class="hidden">
+      <button onclick="startExam()">Start Exam</button>
+      <button onclick="stopExam()">Stop Exam</button>
+      <p id="examStatus">Status: Not started</p>
+      <div id="notification"></div>
+    </div>
+  </section>
+
+  <!-- Audio -->
+  <audio id="startSound" src="C:\Users\hossa\Downloads\ready_start_exam.mp3"></audio>
+  <audio id="timeoutSound" src="C:\Users\hossa\Downloads\thanks_stop_exam.mp3"></audio>
+
+  <!-- Quiz -->
+  <section id="quizSection" class="hidden">
+    <h3>Quiz</h3>
+    <div id="timerDisplay">Time Left: 05:00</div>
+    <div id="questionContainer"></div>
+    <button onclick="prevPage()">Previous</button>
+    <button onclick="nextPage()">Next</button>
+    <button onclick="submitQuiz()">Submit</button>
+  </section>
+
+  <!-- Leaderboard -->
+  <section id="leaderboardSection" class="hidden">
+    <h3>Leaderboard</h3>
+    <table id="leaderboardTable">
+      <thead>
+        <tr>
+          <th>Rank</th><th>Name</th><th>Email</th><th>Institution</th><th>Score</th><th>Time Taken</th><th>Time</th><th>Date</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+  
+  
+
+<script>
+const quizData = [
+  { q: "Capital of France?", t: "mcq", o: ["Paris", "Rome", "Berlin"], a: "Paris" },
+  { q: "Prime numbers?", t: "checkbox", o: ["2", "3", "4"], a: ["2", "3"] },
+  { q: "2+2=?", t: "short", a: "4" }
+];
+
+let startTime;
+let userAnswers = [], userExplanations = [], currentPage = 0, timer, timerInterval, timeLeft = 300, isAdmin = false;
+const adminUsername = "admin", adminPassword = "123", adminSecondPassword = "23";
+
+function showRules() {
+  document.getElementById('rulesSection').classList.remove('hidden');
+}
+function proceedToAdmin() {
+  document.getElementById("adminSection").classList.remove("hidden");
+  document.getElementById("rulesSection").classList.add("hidden");
+}
+function verifyAdmin() {
+  const user = document.getElementById('adminUser').value;
+  const pass = document.getElementById('adminPass').value;
+  const pass2 = document.getElementById('adminSecondPass').value;
+  if (user === adminUsername && pass === adminPassword && pass2 === adminSecondPassword) {
+    isAdmin = true;
+    alert("Admin logged in");
+    document.getElementById('adminControls').classList.remove('hidden');
+  } else {
+    alert("Incorrect admin credentials");
+  }
+}
+
+function startExam() {
+  startTime = new Date();
+  document.getElementById('quizSection').classList.remove('hidden');
+  document.getElementById('leaderboardSection').classList.remove('hidden');
+  document.getElementById('examStatus').textContent = "Status: Started";
+  document.getElementById('startSound').play();
+  document.getElementById('notification').textContent = "Exam has started. Good luck!";
+  shuffleOptions();
+  renderQuestion();
+  timeLeft = 300;
+  updateTimerDisplay();
+  timer = setTimeout(submitQuiz, timeLeft * 1000);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    updateTimerDisplay();
+    if (timeLeft <= 0) clearInterval(timerInterval);
+  }, 1000);
+}
+function stopExam() {
+  clearTimeout(timer);
+  clearInterval(timerInterval);
+  document.getElementById('examStatus').textContent = "Status: Stopped";
+  document.getElementById('startSound').play();
+  document.getElementById('notification').textContent = "Exam has been stopped.";
+  submitQuiz();
+}
+function updateTimerDisplay() {
+  const minutes = Math.floor(timeLeft / 60).toString().padStart(2, "0");
+  const seconds = (timeLeft % 60).toString().padStart(2, "0");
+  document.getElementById("timerDisplay").textContent = `Time Left: ${minutes}:${seconds}`;
+}
+function shuffleOptions() {
+  quizData.forEach(q => { if (q.o) q.o.sort(() => Math.random() - 0.5); });
+}
+function renderQuestion() {
+  const q = quizData[currentPage];
+  let html = `<div class='question'><strong>Q${currentPage + 1}:</strong> ${q.q}<br>`;
+  if (q.t === "mcq") {
+    q.o.forEach(opt => {
+      html += `<label class='option'><input type='radio' name='q' value='${opt}' onchange='saveAnswer("${opt}")'> ${opt}</label>`;
+    });
+  } else if (q.t === "checkbox") {
+    q.o.forEach(opt => {
+      html += `<label class='option'><input type='checkbox' value='${opt}' onchange='saveCheckbox(this)'> ${opt}</label>`;
+    });
+  } else {
+    html += `<input oninput='saveAnswer(this.value)'>`;
+  }
+  if (q.t === "mcq" || q.t === "checkbox") {
+    const currentExp = userExplanations[currentPage] || "";
+    html += `<br><label>Your explanation (optional):</label><br>
+             <textarea rows="3" cols="50" oninput='saveExplanation(${currentPage}, this.value)'>${currentExp}</textarea>`;
+  }
+  html += `</div>`;
+  document.getElementById('questionContainer').innerHTML = html;
+}
+function saveAnswer(val) { userAnswers[currentPage] = val; }
+function saveCheckbox(input) {
+  if (!Array.isArray(userAnswers[currentPage])) userAnswers[currentPage] = [];
+  const arr = userAnswers[currentPage];
+  input.checked ? arr.push(input.value) : arr.splice(arr.indexOf(input.value), 1);
+}
+function saveExplanation(index, text) { userExplanations[index] = text; }
+function nextPage() { if (currentPage < quizData.length - 1) { currentPage++; renderQuestion(); } }
+function prevPage() { if (currentPage > 0) { currentPage--; renderQuestion(); } }
+
+function submitQuiz() {
+  clearTimeout(timer);
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const institution = document.getElementById('institution').value;
+  if (!name || !email) return alert("Fill all fields");
+
+  document.querySelector("#quizSection button[onclick='submitQuiz()']").disabled = true;
+  document.querySelector("#quizSection button[onclick='nextPage()']").disabled = true;
+
+  let score = 0;
+  quizData.forEach((q, i) => {
+    const ans = userAnswers[i];
+    if (q.t === "mcq") {
+      score += (ans === q.a) ? 1 : ans ? -0.25 : 0;
+    } else if (q.t === "checkbox") {
+      const correct = q.a.sort().join();
+      const given = (ans || []).sort().join();
+      score += (correct === given) ? 1 : ans ? -0.25 : 0;
+    } else if (q.t === "short") {
+      score += (ans && ans.trim() === q.a) ? 1 : 0;
+    }
+  });
+
+  const endTime = new Date();
+  const timeTakenSec = Math.floor((endTime - startTime) / 1000);
+  const minutes = Math.floor(timeTakenSec / 60);
+  const seconds = timeTakenSec % 60;
+  const timeTaken = `${minutes}m ${seconds}s`;
+
+  const entry = {
+    name,
+    email,
+    institution,
+    score,
+    time: new Date().toLocaleTimeString(),
+    date: new Date().toLocaleDateString(),
+    timeTaken,
+    answers: userAnswers,
+    explanations: userExplanations
+  };
+
+  localStorage.setItem("quiz_" + email, JSON.stringify(entry));
+  renderLeaderboard();
+  alert("Quiz submitted. Score: " + score);
+}
+
+function renderLeaderboard() {
+  const tbody = document.querySelector("#leaderboardTable tbody");
+  tbody.innerHTML = "";
+  const entries = Object.keys(localStorage)
+    .filter(k => k.startsWith("quiz_"))
+    .map(k => JSON.parse(localStorage.getItem(k)))
+    .sort((a, b) => b.score - a.score);
+
+  entries.forEach((e, i) => {
+    let rowClass = "";
+    if (i === 0) rowClass = "top1";
+    else if (i === 1) rowClass = "top2";
+    else if (i === 2) rowClass = "top3";
+
+    tbody.innerHTML += `
+      <tr class="${rowClass}">
+        <td>${i + 1}</td>
+        <td>${e.name}</td>
+        <td>${e.email}</td>
+        <td>${e.institution}</td>
+        <td>
+  <span>${e.score}</span>
+  <button class="admin-only" onclick='editScore("${e.email}")'>Edit</button>
+</td>
+        <td>${e.timeTaken || '-'}</td>
+        <td>${e.time}</td>
+        <td>${e.date}</td>
+        <td>
+          <span class='admin-only' onclick='preview("${e.email}")'>Preview</span> |
+          <span class='admin-only' onclick='downloadPreview("${e.email}")'>Download</span> |
+          <span class='admin-only' onclick='deleteEntry("${e.email}")'>Delete</span>
+        </td>
+      </tr>`;
+  });
+}
+
+function confirmAdminAction(actionFn) {
+  const input = prompt("Enter Admin Password to confirm:");
+  if (input === adminPassword) {
+    actionFn();
+  } else {
+    alert("Incorrect admin password.");
+  }
+}
+
+function deleteEntry(email) {
+  if (!isAdmin) return alert("Admin only");
+  confirmAdminAction(() => {
+    localStorage.removeItem(`quiz_${email}`);
+    renderLeaderboard();
+    alert("Entry deleted.");
+  });
+}
+
+function preview(email) {
+  if (!isAdmin) return alert("Admin only");
+  confirmAdminAction(() => {
+    const entry = JSON.parse(localStorage.getItem(`quiz_${email}`));
+    if (!entry) return alert("Not found");
+    let content = `Name: ${entry.name}\nEmail: ${entry.email}\nInstitution: ${entry.institution}\nScore: ${entry.score}\n\nAnswers:\n`;
+    quizData.forEach((q, i) => {
+      const correct = Array.isArray(q.a) ? q.a.join(", ") : q.a;
+      const given = Array.isArray(entry.answers[i]) ? entry.answers[i].join(", ") : entry.answers[i];
+      const explanation = entry.explanations?.[i] || "None";
+      content += `Q${i + 1}: ${q.q}\nCorrect: ${correct}\nGiven: ${given || "Not answered"}\nUser Explanation: ${explanation}\n\n`;
+    });
+    alert(content);
+  });
+}
+
+function downloadPreview(email) {
+  if (!isAdmin) return alert("Admin only");
+  confirmAdminAction(() => {
+    const entry = JSON.parse(localStorage.getItem(`quiz_${email}`));
+    if (!entry) return alert("Not found");
+    let content = `Name: ${entry.name}\nEmail: ${entry.email}\nInstitution: ${entry.institution}\nScore: ${entry.score}\nDate: ${entry.date}\nTime: ${entry.time}\n\nAnswers:\n`;
+    quizData.forEach((q, i) => {
+      const correct = Array.isArray(q.a) ? q.a.join(", ") : q.a;
+      const given = Array.isArray(entry.answers[i]) ? entry.answers[i].join(", ") : entry.answers[i];
+      const explanation = entry.explanations?.[i] || "None";
+      content += `Q${i + 1}: ${q.q}\nCorrect: ${correct}\nGiven: ${given || "Not answered"}\nUser Explanation: ${explanation}\n\n`;
+    });
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${entry.name}_preview.txt`;
+    link.click();
+  });
+}
+  
+  function editScore(email) {
+  if (!isAdmin) return alert("Admin only");
+  confirmAdminAction(() => {
+    const data = JSON.parse(localStorage.getItem(`quiz_${email}`));
+    if (!data) return alert("Entry not found");
+    const newScore = prompt("Enter new score:", data.score);
+    const scoreNum = parseFloat(newScore);
+    if (isNaN(scoreNum)) return alert("Invalid score");
+    data.score = scoreNum;
+    localStorage.setItem(`quiz_${email}`, JSON.stringify(data));
+    renderLeaderboard();
+    alert("Score updated.");
+  });
+}
+
+  
+</script>
+</body>
+</html>
